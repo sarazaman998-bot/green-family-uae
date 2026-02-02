@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Family UAE - Sustainable Living in the Emirates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5016;
+            --secondary: #7fa650;
+            --accent: #d4a574;
+            --sand: #f4e9d8;
+            --sky: #e8f4f8;
+            --text-dark: #1a1a1a;
+            --text-light: #907777;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--sand) 0%, #fff 100%);
+            overflow-x: hidden;
+        }
+
+        /* Animated background leaves */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .leaf:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .leaf:nth-child(2) { left: 30%; animation-delay: 3s; }
+        .leaf:nth-child(3) { left: 50%; animation-delay: 6s; }
+        .leaf:nth-child(4) { left: 70%; animation-delay: 9s; }
+        .leaf:nth-child(5) { left: 90%; animation-delay: 12s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-100vh) rotate(0deg); }
+            50% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 20px rgba(45, 80, 22, 0.1);
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🌿';
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main container */
+        .main-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page sections */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, rgba(127, 166, 80, 0.1) 0%, rgba(212, 165, 116, 0.1) 100%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-image-box {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 60px rgba(45, 80, 22, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        /* Content sections */
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Cards grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(127, 166, 80, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(45, 80, 22, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card p, .card ul {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Stats section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 30px;
+            color: white;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Tips section */
+        .tips-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tip-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--secondary);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .tip-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--primary);
+        }
+
+        .tip-item h4 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* UAE initiatives */
+        .initiative-card {
+            background: linear-gradient(135deg, var(--sky) 0%, white 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .initiative-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .initiative-card .year {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(45, 80, 22, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .scroll-indicator:hover {
+            transform: translateY(-5px);
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-decoration">
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+        <div class="leaf">🍃</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Green Family UAE</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" onclick="showPage('home')">Home</a></li>
+                <li><a href="#green-home" class="nav-link" onclick="showPage('green-home')">Green Home</a></li>
+                <li><a href="#eco-lifestyle" class="nav-link" onclick="showPage('eco-lifestyle')">Eco Lifestyle</a></li>
+                <li><a href="#uae-action" class="nav-link" onclick="showPage('uae-action')">UAE Action</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- HOME PAGE -->
+        <div id="home" class="page-section active">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Building a Greener Future Together</h1>
+                        <p>Join thousands of UAE families taking climate action through simple, sustainable choices. Every small step creates lasting change for our planet and future generations.</p>
+                        <a href="#green-home" class="cta-button" onclick="showPage('green-home')">Start Your Journey</a>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-image-box">🌍</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Why Climate Action Matters</h2>
+                    <p>Understanding our impact is the first step toward positive change</p>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">1.5°C</span>
+                        <span class="stat-label">Global Temperature Rise Target</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">70%</span>
+                        <span class="stat-label">Of UAE Energy from Clean Sources by 2050</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50%</span>
+                        <span class="stat-label">Waste Reduction Possible at Home</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">30%</span>
+                        <span class="stat-label">Water Savings with Simple Changes</span>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <span class="card-icon">🌡️</span>
+                        <h3>Climate Crisis</h3>
+                        <p>Rising temperatures, extreme weather, and ecosystem disruption demand urgent action. The UAE is particularly vulnerable to heat increases and water scarcity.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">👨‍👩‍👧‍👦</span>
+                        <h3>Family Impact</h3>
+                        <p>Every household contributes to carbon emissions through energy use, water consumption, and waste. Together, families can drive meaningful change.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🎯</span>
+                        <h3>Take Action</h3>
+                        <p>Small daily choices add up to significant environmental impact. From energy conservation to waste reduction, every action counts.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- GREEN HOME PAGE -->
+        <div id="green-home" class="page-section">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Transform Your Home</h2>
+                    <p>Practical tips to reduce energy and water consumption</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <span class="card-icon">💡</span>
+                        <h3>Electricity Savings</h3>
+                        <ul>
+                            <li>Switch to LED bulbs (75% less energy)</li>
+                            <li>Set AC to 24°C instead of 20°C</li>
+                            <li>Unplug devices when not in use</li>
+                            <li>Use smart power strips</li>
+                            <li>Install solar panels where possible</li>
+                            <li>Use natural light during daytime</li>
+                            <li>Choose Energy Star appliances</li>
+                            <li>Run washing machines with full loads</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-icon">💧</span>
+                        <h3>Water Conservation</h3>
+                        <ul>
+                            <li>Fix leaking taps immediately</li>
+                            <li>Install low-flow showerheads</li>
+                            <li>Take shorter showers (5 minutes)</li>
+                            <li>Turn off tap while brushing teeth</li>
+                            <li>Reuse greywater for plants</li>
+                            <li>Choose native, drought-resistant plants</li>
+                            <li>Water gardens early morning or evening</li>
+                            <li>Use drip irrigation systems</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-icon">🏠</span>
+                        <h3>Smart Home Tips</h3>
+                        <ul>
+                            <li>Improve insulation to reduce AC use</li>
+                            <li>Use ceiling fans to circulate air</li>
+                            <li>Keep curtains closed during peak sun</li>
+                            <li>Install double-glazed windows</li>
+                            <li>Plant trees for natural shade</li>
+                            <li>Use programmable thermostats</li>
+                            <li>Choose light-colored roofing</li>
+                            <li>Seal gaps around doors and windows</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <h4>💰 Quick Win: AC Efficiency</h4>
+                        <p>Simply raising your AC temperature from 20°C to 24°C can save up to 24% on cooling costs. Clean filters monthly for optimal performance and lower energy bills.</p>
+                    </div>
+                    <div class="tip-item">
+                        <h4>🌟 Energy Audit</h4>
+                        <p>Request a free home energy audit from DEWA (Dubai) or ADDC (Abu Dhabi) to identify specific areas for improvement and potential savings.</p>
+                    </div>
+                    <div class="tip-item">
+                        <h4>📱 Monitor Usage</h4>
+                        <p>Use DEWA Smart App or ADDC app to track real-time electricity and water consumption. Set alerts for unusual spikes to catch wastage early.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ECO LIFESTYLE PAGE -->
+        <div id="eco-lifestyle" class="page-section">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Live Sustainably</h2>
+                    <p>Reduce, Reuse, Recycle - The three R's of eco-conscious living</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <span class="card-icon">📉</span>
+                        <h3>Reduce</h3>
+                        <p><strong>Minimize what you consume and waste</strong></p>
+                        <ul>
+                            <li>Buy only what you need</li>
+                            <li>Choose products with minimal packaging</li>
+                            <li>Avoid single-use plastics</li>
+                            <li>Shop with reusable bags</li>
+                            <li>Choose quality over quantity</li>
+                            <li>Go paperless - use digital documents</li>
+                            <li>Refuse unnecessary freebies and samples</li>
+                            <li>Plan meals to reduce food waste</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-icon">♻️</span>
+                        <h3>Reuse</h3>
+                        <p><strong>Give items a second life before discarding</strong></p>
+                        <ul>
+                            <li>Use refillable water bottles</li>
+                            <li>Repurpose glass jars for storage</li>
+                            <li>Donate clothes and toys</li>
+                            <li>Buy second-hand when possible</li>
+                            <li>Repair instead of replace</li>
+                            <li>Use cloth napkins instead of paper</li>
+                            <li>Compost food scraps</li>
+                            <li>Upcycle furniture and decor</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-icon">🔄</span>
+                        <h3>Recycle</h3>
+                        <p><strong>Properly dispose of materials for processing</strong></p>
+                        <ul>
+                            <li>Separate recyclables at home</li>
+                            <li>Use designated recycling bins</li>
+                            <li>Recycle paper, cardboard, glass, metal</li>
+                            <li>Take e-waste to collection centers</li>
+                            <li>Recycle batteries properly</li>
+                            <li>Return plastic bottles to stores</li>
+                            <li>Dispose of hazardous waste safely</li>
+                            <li>Clean containers before recycling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="initiative-card">
+                    <h3>🛍️ Sustainable Shopping Guide</h3>
+                    <p><strong>Choose eco-friendly options:</strong></p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
+                        <li style="padding: 0.5rem 0;">✅ Look for products made from recycled materials</li>
+                        <li style="padding: 0.5rem 0;">✅ Support local UAE businesses to reduce transport emissions</li>
+                        <li style="padding: 0.5rem 0;">✅ Choose organic and sustainably sourced products</li>
+                        <li style="padding: 0.5rem 0;">✅ Avoid products with excessive plastic packaging</li>
+                        <li style="padding: 0.5rem 0;">✅ Buy in bulk to reduce packaging waste</li>
+                        <li style="padding: 0.5rem 0;">✅ Bring your own containers to refill stations</li>
+                    </ul>
+                </div>
+
+                <div class="initiative-card">
+                    <h3>🚗 Sustainable Transportation</h3>
+                    <p><strong>Reduce your carbon footprint:</strong></p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
+                        <li style="padding: 0.5rem 0;">🚇 Use Dubai Metro, Tram, and public buses</li>
+                        <li style="padding: 0.5rem 0;">🚴 Bike for short distances</li>
+                        <li style="padding: 0.5rem 0;">🚗 Carpool with neighbors or colleagues</li>
+                        <li style="padding: 0.5rem 0;">⚡ Consider electric or hybrid vehicles</li>
+                        <li style="padding: 0.5rem 0;">🏃 Walk when possible for health and environment</li>
+                        <li style="padding: 0.5rem 0;">📱 Use ride-sharing apps to reduce car usage</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- UAE ACTION PAGE -->
+        <div id="uae-action" class="page-section">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>UAE Sustainability Initiatives</h2>
+                    <p>How the Emirates leads the way in climate action</p>
+                </div>
+
+                <div class="initiative-card">
+                    <span class="year">2050</span>
+                    <h3>UAE Net Zero by 2050</h3>
+                    <p>The UAE Strategic Initiative to achieve net-zero emissions by 2050, making it the first Middle Eastern nation to set this ambitious target. This comprehensive plan includes massive investment in renewable energy, green hydrogen, and carbon capture technologies.</p>
+                </div>
+
+                <div class="initiative-card">
+                    <span class="year">Ongoing</span>
+                    <h3>Mohammed bin Rashid Al Maktoum Solar Park</h3>
+                    <p>The world's largest single-site solar park, generating 5,000 MW of clean energy by 2030. Located in Dubai, this project will reduce 6.5 million tonnes of carbon emissions annually and power 1.3 million homes.</p>
+                </div>
+
+                <div class="initiative-card">
+                    <span class="year">2030</span>
+                    <h3>Abu Dhabi's Masdar City</h3>
+                    <p>The world's most sustainable urban development, powered entirely by renewable energy. Masdar City showcases cutting-edge green building design, zero-waste principles, and sustainable transportation systems.</p>
+                </div>
+
+                <div class="initiative-card">
+                    <span class="year">Active</span>
+                    <h3>Green Building Regulations</h3>
+                    <p>Mandatory green building codes across all new construction in Dubai and Abu Dhabi. Buildings must meet strict efficiency standards for water, energy, and materials, reducing environmental impact by up to 50%.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <span class="card-icon">♻️</span>
+                        <h3>Waste Management</h3>
+                        <p><strong>Target: Zero Waste to Landfill</strong></p>
+                        <ul>
+                            <li>Comprehensive recycling programs</li>
+                            <li>Waste-to-energy facilities</li>
+                            <li>Banned single-use plastics in many emirates</li>
+                            <li>Food waste composting initiatives</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-icon">🌊</span>
+                        <h3>Water Security</h3>
+                        <p><strong>Advanced conservation strategies</strong></p>
+                        <ul>
+                            <li>Desalination using renewable energy</li>
+                            <li>Wastewater treatment and reuse</li>
+                            <li>Smart irrigation for agriculture</li>
+                            <li>Water-efficient landscaping requirements</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-icon">🌳</span>
+                        <h3>Green Spaces</h3>
+                        <p><strong>Increasing urban greenery</strong></p>
+                        <ul>
+                            <li>Million Tree Initiative across emirates</li>
+                            <li>Mangrove restoration projects</li>
+                            <li>Urban farms and community gardens</li>
+                            <li>Protected natural reserves</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="initiative-card">
+                    <h3>🌍 COP28 Dubai 2023</h3>
+                    <p>The UAE hosted the 28th Conference of the Parties to the UN Framework Convention on Climate Change, bringing together world leaders to accelerate climate action. Key outcomes included the UAE Consensus on transitioning away from fossil fuels and the establishment of a Loss and Damage Fund to support vulnerable nations.</p>
+                </div>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <h4>📱 Get Involved</h4>
+                        <p>Download the "UAE Green App" to track your carbon footprint, find recycling centers, and earn rewards for sustainable choices. Join community clean-up events organized through the Emirates Environmental Group.</p>
+                    </div>
+                    <div class="tip-item">
+                        <h4>🎓 Education Programs</h4>
+                        <p>Schools across the UAE integrate sustainability into curriculum. The Eco-Schools program has certified hundreds of institutions, teaching the next generation environmental responsibility.</p>
+                    </div>
+                    <div class="tip-item">
+                        <h4>💚 Support Local Initiatives</h4>
+                        <p>Participate in Dubai Can (refillable water initiative), the Plastic-Free Dubai movement, and volunteer with Emirates Environmental Group, Goumbook, and other local environmental organizations.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Green Family UAE. Building a sustainable future together. 🌱</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">Every action counts. Start your green journey today.</p>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-indicator" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Smooth scroll for hero CTA
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage('green-home');
+                });
+            }
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .tip-item, .initiative-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
